@@ -6,7 +6,7 @@ import connectionPool from "./utils/db.mjs";
 import { errorHandler, notFoundHandler } from "./middleware/error-handler.mjs";
 
 const app = express();
-const serverPort = process.env.PORT || 5001;
+const serverPort = 5001;
 
 // Global Middleware: เปิด CORS และแปลง JSON request body เป็น JavaScript object
 app.use(cors());
@@ -38,7 +38,7 @@ app.use("/answers", answerRouter);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// Start Server: เริ่มรับ request ตาม port ที่กำหนดใน .env
+// Start Server: เริ่มรับ request ที่ port 5001
 app.listen(serverPort, () => {
   console.log(`Server is running at http://localhost:${serverPort}`);
 });

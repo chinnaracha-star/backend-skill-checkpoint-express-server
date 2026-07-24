@@ -18,7 +18,6 @@ REST API สำหรับเว็บไซต์ถาม-ตอบคล้�
 - PostgreSQL และ `pg`
 - Express Router
 - CORS
-- dotenv
 - Nodemon
 - Postman
 
@@ -37,7 +36,6 @@ REST API สำหรับเว็บไซต์ถาม-ตอบคล้�
 │   └── questions.mjs
 ├── utils
 │   └── db.mjs
-├── .env.example
 └── package.json
 ```
 
@@ -63,16 +61,21 @@ https://gist.github.com/napatwongchr/811ef7071003602b94482b3d8c0f32e0
 
 Script จะสร้างตาราง `questions`, `answers`, `question_votes` และ `answer_votes` พร้อม Foreign Key แบบ `ON DELETE CASCADE`
 
-### 3. ตั้งค่า Environment Variables
+### 3. ตั้งค่าการเชื่อมต่อฐานข้อมูล
 
-คัดลอก `.env.example` เป็น `.env` แล้วแก้ค่าตามเครื่องของตนเอง:
+แก้ข้อมูล PostgreSQL ใน `utils/db.mjs` ให้ตรงกับฐานข้อมูลในเครื่อง:
 
-```env
-DATABASE_URL=postgresql://YOUR_USERNAME:YOUR_PASSWORD@localhost:5432/YOUR_DATABASE
-PORT=5001
+```js
+const connectionPool = new Pool({
+  user: "postgres",
+  host: "localhost",
+  database: "CheckPoint",
+  password: "YOUR_PASSWORD",
+  port: 5432,
+});
 ```
 
-ไม่ควร commit `.env` เพราะมี username และ password ของฐานข้อมูล
+ไม่ควรเผยแพร่รหัสผ่านจริงเมื่อนำโปรเจกต์ขึ้น GitHub
 
 ### 4. เริ่ม Server
 
